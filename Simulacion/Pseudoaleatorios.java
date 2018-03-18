@@ -1,18 +1,24 @@
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pseudoaleatorios;
+
 
 /**
  *
  * @author Jared
  */
-public class Pseudoaleatorios {
+public class PseudoAleatorios {
 
-    public static double[] cuadradosMedios(String semilla, int cantidad){
-        double[] coleccion = new double[cantidad]; // creamos una coleccion y la instanciamos aqui se almacenaran los numeros pseudo... ya saben la r
+    public static NumerosP cuadradosMedios(String semilla, int cantidad){
+         
+        NumerosP np = new NumerosP(cantidad); //Creamos una instancia de la clase NumerosP que almacenara dos arreglos, uno conteniendo el valor de las x y otro el de las r
         int y; 
         int x;
         int semillaSize; // esta variable sirve para saber el size inicial de nuestro valor semilla
@@ -31,32 +37,68 @@ public class Pseudoaleatorios {
               if(aux.length()>3){ // preguntamos si el numero al cuadrado es mayor que 3 para continuar con el codigo 
                     int aux2 = (aux.length()- semillaSize)/2; //aqui determinamos donde se va a empezar a tomar los numeros de enmedio
                     x = Integer.valueOf(aux.substring(aux2,  semillaSize+aux2)); //este esta interesante aqui partimos el string del indice que sacamos en la sentencia anterior hasta la sentencia anterior sumadoi al size de la semilla
-                    coleccion[i]= ((double)x/Math.pow(10,  semillaSize));     //ahora simplemente guardamos el numero real , aqui es donde sacamos r, osea que dividimos el valor de x entre 10 elevado al valor del size de la semilla para que se transforme pues de ej 1234 a 0.1234 ya saben porque pues es probabilidad.
+                    np.x[i]=aux.substring(aux2,  semillaSize+aux2);   // Se agrega x al arreglo x de NumeroP
+                    np.r[i]= ((double)x/Math.pow(10,  semillaSize));     //ahora simplemente guardamos el numero real , aqui es donde sacamos r, osea que dividimos el valor de x entre 10 elevado al valor del size de la semilla para que se transforme pues de ej 1234 a 0.1234 ya saben porque pues es probabilidad.
                }
             }
           //cuando acabe el ciclo simplemente regresamos el array con todos los numeros reales generados
-          return coleccion;  
+          return np;//Se regresa el objeto np que contendra el arreglo de x y el arreglo de r
             
         }catch(Exception ex){
-            // si causa un error el programa mandamos null, erika por que me rompiste el kokoro a mi y a Karen 
+            // si causa un error el programa mandamos null
             return null;
         }
     }
     //como pueden ver el linea fue mucho mas facil jaja para empezar pues solicitamos en forma de parametros las constantes que ocupa el metodo
-    public static double[] lineal(String semilla, int a,int c,int m,int cantidad){
-        // lo mismo que arriba se crea un array para almacenar los numeros pseudoaleatorios (r)
-        double[] coleccion = new double[cantidad];
+    public static NumerosP lineal(String semilla, int a,int c,int m,int cantidad){
+        NumerosP np = new NumerosP(cantidad);
+        
         try{
             int x = Integer.valueOf(semilla);
             for(int i=0;i<cantidad;i++){
                 x = ((a*x)+33)%m; // se pasa la formula tal cual jaja
-                coleccion[i]= (double) x / (m-1); // se guarda el numero real
+                np.x[i]= String.valueOf(x); //Se convierte el resultado de x a un String para almacenarlo en el valor del arreglo x de NumerosP
+                np.r[i]= (double) x / (m-1); // se guarda el numero real
             }
-            return coleccion; // cuando terminan las iteraciones se regresa el array de numeros reales
+            return np; //Se regresa el objeto np que contendra el arreglo de x y el arreglo de r
         }catch(Exception ex){
-            return null;
+            return null;// si causa un error el programa mandamos null
         }
     }
    // vamos equipo si se puede, ahora hay que peeguntar si se requiere un gui ahorita o hasta que se saquen los 4096
     
+    public static NumerosP conguencialCuadratico(int semilla, int m, int a, int b, int c, int cantidad){
+        NumerosP np = new NumerosP(cantidad);
+        try{
+            
+            double x = semilla;
+           
+            for(int i=0;i<cantidad;i++){
+                x = (a*(Math.pow(x,2))+(b*x)+c)%m;
+                np.x[i]=String.valueOf(x);
+            }
+            return np;
+        }catch(Exception ex){
+            return null;
+        }
+    }
+     public static void escribirArchivo(double nr[]){
+        try{
+            File archivo = new File("numeros.txt");
+            FileWriter fichero;
+            PrintWriter pw = null;
+            fichero = new FileWriter(archivo);
+            pw = new PrintWriter(fichero);
+            for(int i=0; i<nr.length;i++){
+                if(i%10==0){
+                    pw.println("\n");           
+                }
+                pw.print(String.format("%1.4f", nr[i]));
+                pw.print(" ");
+                
+            }
+        }catch(Exception ex){
+            
+        }
+    }
 }
