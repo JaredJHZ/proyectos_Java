@@ -1,6 +1,7 @@
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /*
@@ -82,13 +83,14 @@ public class PseudoAleatorios {
             return null;
         }
     }
-     public static void escribirArchivo(double nr[]){
-        try{
-            File archivo = new File("numeros.txt");
+    
+    public static void escribirArchivo(double nr[]) throws IOException{
+        File archivo = new File("numeros.txt");
             FileWriter fichero;
             PrintWriter pw = null;
-            fichero = new FileWriter(archivo);
-            pw = new PrintWriter(fichero);
+         fichero = new FileWriter(archivo);
+         pw = new PrintWriter(fichero);
+        try{
             for(int i=0; i<nr.length;i++){
                 if(i%10==0){
                     pw.println("\n");           
@@ -99,6 +101,8 @@ public class PseudoAleatorios {
             }
         }catch(Exception ex){
             
+        }finally{
+            pw.close();
         }
     }
 }
