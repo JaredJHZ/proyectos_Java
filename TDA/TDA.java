@@ -16,8 +16,13 @@ public class TDA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+    	TDA.main();
+    
+    }
 
-        int eleccion;
+	public static void main() {
+		// TODO Auto-generated method stub
+	    int eleccion;
         System.out.println("Bienvenido a las pruebas de los TDA Lineales");
         Scanner entrada = new Scanner(System.in);
         boolean bandera = true;
@@ -33,15 +38,33 @@ public class TDA {
                     break;
                 }
                 case 2:{
-                    
+                	System.out.println("1) Cola simple");
+                	System.out.println("1) Cola circular");
+                	eleccion = entrada.nextInt();
+                	if(eleccion == 1) {
+                		Cola.menu();
+                	}else if(eleccion ==2) {
+                		ColaCircular.menu();
+                	}else {
+                		System.out.println("Elija una opcion valida");
+                	}       
+                    break;
                 }
                 case 3:{
-                    bandera=true;
+                    ListaEnlazada.menu();
                     break;
+                }
+                case 4:{
+                	bandera = true;
+                	System.out.println("Bye");
+                	break;
+                }
+                default:{
+                	System.out.println("Escriba una eleccion valida!");
                 }
                     
             }
         }while(bandera!=true);
-    }
+	}
     
 }
