@@ -20,18 +20,25 @@ public class Token {
 
 }
  enum Tipos{
-              Numero("[0-9]+"),
+              Numero("[0-9]{1,9}(\\.[0-9]{0,2})?$"),
               OperadorArtitmetico("[*|/?|+|-]"),
               Letras("[A-Z]"),
-              tabulador("[\t]"),
+              tabulador("\\t"),
               cicloFor("for"),
               cicloWhile("while"),
               palabraReservadaClase("clase"),
               palabraReservadaConstante("define"),
               dosPuntos(":"),
               operadorLogico("[<|>|=|!=]"),
-              saltoDeLinea("\n"),
-              espacio("/s");
+              saltoDeLinea("\\n"),
+              variables("[a-zA-ZñÑ\\s]"),
+              Tipo("(?i)(\\W|^)(int|void|clase|char|float\\smía|double)(\\W|$)"),
+              parentesis("[(?)]"),
+              espacio("((.*)\\n*)"),
+              puntoFinal("\\.")
+              
+              
+              ;
               ;
               public final String patron;
               Tipos(String s){
