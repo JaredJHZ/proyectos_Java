@@ -91,11 +91,14 @@ public class Pila {
             }
             case 3:
             {
-      
                 bandera = true;
                 break;
             }
+            default:{
+            	System.out.println("Escriba una opcion valida");
+            }
         }
         }while(bandera!=true);
+        TDA.main();
     }
 }

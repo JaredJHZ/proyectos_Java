@@ -5,6 +5,8 @@
  */
 package tda;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Jared
@@ -129,5 +131,117 @@ public class ListaEnlazada {
         }
        
         size--;
+    }
+    
+    public int getSize() {
+    	return this.size;
+    }
+    
+    public void setDatoAlInicio(Object dato) {
+    	Nodo aux = new Nodo(dato);
+    	Nodo aux2 ;
+    	aux2 = this.inicio;
+    	this.inicio = aux;
+    	aux.siguiente = aux2;
+    }
+    public void setDatoAlFinal(Object dato) {
+    	Nodo aux = new Nodo(dato);
+    	Nodo aux2 = this.inicio;
+    	while(aux2.siguiente!=null) {
+    		aux2 = aux2.siguiente;
+    	}
+    	aux2.siguiente = aux;
+    }
+    
+    public static void menu() {
+    	ListaEnlazada lista = new ListaEnlazada();
+    	int eleccion;
+    	int referencia;
+    	int dato;
+    	boolean bandera = false;
+    	System.out.println("Menu Lista enlazada");
+    	Scanner entrada = new Scanner(System.in);
+    	do {
+    		System.out.println("Elija una opcion");
+    		System.out.println("1) Creacion");
+    		System.out.println("2) Insercion");
+    		System.out.println("3) Eliminacion");
+    		System.out.println("4) Busquedad");
+    		System.out.println("5) Recorrido");
+    		System.out.println("6) Regresar");
+    		eleccion = entrada.nextInt();
+    		switch(eleccion) {
+    		case 1:{
+    			if(lista.inicio==null) {
+    			System.out.println("Escriba el dato que iniciara la lista enlazada");
+    			dato = entrada.nextInt();
+    			lista.setDato(dato);}
+    			else System.out.println("Lista ya iniciada");
+    			break;
+    		}
+    		case 2:{
+    			System.out.println("1) Inicio");
+    			System.out.println("2) Final");
+    			System.out.println("3) Antes");
+    			System.out.println("4) Despues");
+    			System.out.println("5) Regresar");
+    			eleccion = entrada.nextInt();
+    			if(eleccion ==1) {
+    				System.out.println("Escriba el dato");
+    				dato = entrada.nextInt();
+    				lista.setDatoAlInicio(dato);
+    			}else if(eleccion == 2) {
+    				System.out.println("Escriba el dato");
+    				dato = entrada.nextInt();
+    				lista.setDatoAlFinal(dato);
+    			}else if(eleccion == 3) {
+    				System.out.println("Escriba el dato referenciado");
+    				referencia = entrada.nextInt();
+    				System.out.println("Escriba el dato a agregar");
+    				dato = entrada.nextInt();
+    				lista.setDatoAntes(referencia, dato);
+    				System.out.println("Dato agregado");
+    			}else if(eleccion ==4) {
+    				System.out.println("Escriba el dato referenciado");
+    				referencia = entrada.nextInt();
+    				System.out.println("Escriba el dato a agregar");
+    				dato = entrada.nextInt();
+    				lista.setDatoDespues(referencia, dato);
+    				System.out.println("Dato agregado");
+    			}else if(eleccion == 5) {
+    				System.out.println("Ok");
+    			}else {
+    				System.out.println("error volviendo");
+    			}
+    		break;
+    		}
+    		case 3:{
+    			System.out.println("Escriba el dato a eliminar");
+    			dato = entrada.nextInt();
+    			lista.eliminarDato(dato);
+    			break;
+    		}
+    		case 4:{
+    			System.out.println("Escriba el dato a buscar");
+    			dato = entrada.nextInt();
+    			lista.buscarDato(dato);
+    			break;
+    		}
+    		case 5:{
+    			lista.imprimirLista();
+    			break;
+    		}
+    		case 6:{
+    			bandera = true;
+    			break;
+    		}
+    		default:{
+    			System.out.println("Escriba una eleccion valida!");
+    			break;
+    		}
+    		}
+    		
+    	}while(bandera!=true);
+    	 TDA.main();
     }
 }

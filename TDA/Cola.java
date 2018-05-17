@@ -58,11 +58,36 @@ public class Cola {
         int eleccion;
         int dato;
         boolean bandera = false;
+        
         do{
             System.out.println("Menu de colas");
             System.out.println("1) Insertar");
             System.out.println("2) Eliminar");
             System.out.println("3) Salir");
+            eleccion = entrada.nextInt();
+            switch(eleccion) {
+            case 1:{
+            	System.out.println("Escriba el dato");
+            	dato = entrada.nextInt();
+            	c.setDato(dato);
+            	c.imprimirCola();
+            	break;
+            }
+            case 2:{
+            	c.deleteDato();
+            	System.out.println("Dato eliminado");
+            	c.imprimirCola();
+            	break;
+            }
+            case 3:{
+            	bandera = true;
+            	break;
+            }
+            default:{
+            	System.out.println("Escriba una opcion valida");
+            }
+            }
         }while(bandera!=true);
+        TDA.main();
     }
 }
