@@ -1,0 +1,33 @@
+clase carro : {
+       int llantas
+       double precio
+       char id
+         carro ( precio ) :
+            llantas 4
+	    precio 35000
+             correr ( distancia ) : {
+	    for ( i = 1; i < 300; i+ ) :
+	    imprimir ( i ) ;
+             }
+}
+
+clase tractor : {
+      int llantas;
+      float potencia;
+      tractor(){
+            llantas = 4;
+            potencia = 3000;
+      }
+       correr ( distancia ) : {
+	    for ( i = 1; i < 300; i+ ) :
+	    imprimir ( i ) ;
+       }
+
+}
+
+void main() : {
+      car1 = carro();
+      trac1 = tractor;
+      car1.correr();
+      trac1.correr();
+ }

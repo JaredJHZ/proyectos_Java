@@ -44,8 +44,8 @@ public class Lexer{
                             }
                      }
                      if(!matched){
-                            throw new RuntimeException("No existe tal token");
-                     }
+                      //   throw new RuntimeException("No existe tal token");
+                  }
               }
               return tokens;
        }

@@ -6,6 +6,10 @@
 package analizadorlexico;
 
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -14,6 +18,7 @@ import javax.swing.JLabel;
  *
  * @author Jared
  */
+
 public class prueba extends javax.swing.JFrame {
 
     /**
@@ -45,6 +50,26 @@ public class prueba extends javax.swing.JFrame {
       
         
     }
+    
+    private String leerTexto() {
+    	String resultado="";
+    	String linea;
+    	try {
+			BufferedReader br = new BufferedReader(new FileReader("codigoLe.txt"));
+			while((linea = br.readLine())!=null) {
+				resultado+=linea+"\n";
+			}
+			return resultado;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "error";
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "error";
+		}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +94,7 @@ public class prueba extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
 
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Valores");
@@ -96,10 +122,10 @@ public class prueba extends javax.swing.JFrame {
 
         jLabel3.setText("Contadores");
 
-        jLabel4.setText("Hernandez Zuñiga Jared Josafhat");
+        jLabel4.setText("Equipo 1 Hernandez Zuñiga Jared Josafhat, Julio Cesar Benitez, Giselle Ivette , Alejandra Prieto M");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Analizador Léxico para Lenguajes Automatas 1");
+        jLabel5.setText("Analizador Léxico para Lenguajes Automatas 1 \t Profesor: Ing Tom Medilla");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,6 +209,7 @@ public class prueba extends javax.swing.JFrame {
         );
 
         pack();
+        this.fuente.setText(this.leerTexto());
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -194,9 +221,11 @@ public class prueba extends javax.swing.JFrame {
         tokens=analizar.lex(this.fuente.getText());
         for(Token token: tokens){
            this.destino1.append(token.getTipo()+" : "+token.getValor()+"\n");
-        }     
+        }   
         for(Reservada r:  analizar.rs){
+        	
             this.contadores.append(r.reservada+" : "+r.size+"\n");
+         
         }
         }catch(Exception ex){
             destino1.setText(ex.getMessage());

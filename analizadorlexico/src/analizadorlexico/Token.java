@@ -31,13 +31,11 @@ public class Token {
               dosPuntos(":"),
               operadorLogico("[<|>|=|!=]"),
               saltoDeLinea("\\n"),
-              variables("[a-zA-ZñÑ\\s]"),
-              Tipo("(?i)(\\W|^)(int|void|clase|char|float\\smía|double)(\\W|$)"),
+              variables("[a-zA-ZñÑ\\s][^(int)][^(clase)][^(float)]"),
+              Tipo("(?i)(\\W|^)(int|void|clase|char|float\\smía|double|boolean)(\\W|$)"),
               parentesis("[(?)]"),
               espacio("((.*)\\n*)"),
               puntoFinal("\\.")
-              
-              
               ;
               ;
               public final String patron;
