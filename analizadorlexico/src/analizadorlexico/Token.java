@@ -2,7 +2,7 @@ package analizadorlexico;
 
 public class Token {
        public  int size;
-       private Tipos tipo;
+       private Tipos tipo=null;
        private String valor;
        public Tipos getTipo(){
               return tipo;
@@ -34,8 +34,9 @@ public class Token {
               variables("[a-zA-ZñÑ\\s][^(int)][^(clase)][^(float)]"),
               Tipo("(?i)(\\W|^)(int|void|clase|char|float\\smía|double|boolean)(\\W|$)"),
               parentesis("[(?)]"),
-              espacio("((.*)\\n*)"),
-              puntoFinal("\\.")
+              //espacio("((.*)\\n*)"),
+              puntoFinal("\\."),
+              delimitador("[{?}]")
               ;
               ;
               public final String patron;

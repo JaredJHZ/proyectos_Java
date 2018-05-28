@@ -93,7 +93,9 @@ public class prueba extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-
+        javax.swing.JButton leer = new javax.swing.JButton();
+        
+        
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,14 +117,17 @@ public class prueba extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
+        
+    
+        
+        
         destino1.setColumns(20);
         destino1.setRows(5);
         jScrollPane3.setViewportView(destino1);
 
         jLabel3.setText("Contadores");
 
-        jLabel4.setText("Equipo 1 Hernandez Zuñiga Jared Josafhat, Julio Cesar Benitez, Giselle Ivette , Alejandra Prieto M");
+        jLabel4.setText("Equipo 1 Hernandez Zuñiga Jared Josafhat, Julio Cesar Benitez, Ivette , Prieto M, Vasconselos Ruiz");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Analizador Léxico para Lenguajes Automatas 1 \t Profesor: Ing Tom Medilla");
@@ -213,22 +218,26 @@ public class prueba extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+    	//aqui se hace la magia
         destino1.setText("");
         contadores.setText("");
         try{
-        Lexer analizar = new Lexer();
-        tokens=analizar.lex(this.fuente.getText());
+	        Lexer analizar = new Lexer(); //instancia de lexer
+	        tokens=analizar.lex(this.fuente.getText()); //asigno el arraylist de tokens a mi atributo de tokens que tengo en esta clase
         for(Token token: tokens){
-           this.destino1.append(token.getTipo()+" : "+token.getValor()+"\n");
+        	
+           this.destino1.append(token.getTipo()+" : "+token.getValor()+"\n"); // imprimo el tipo y el valor de tokens
+           
         }   
         for(Reservada r:  analizar.rs){
         	
-            this.contadores.append(r.reservada+" : "+r.size+"\n");
+            this.contadores.append(r.reservada+" : "+r.size+"\n"); //imprimo cuantos tokens de que cada tipo tengo.
          
         }
         }catch(Exception ex){
+        	
             destino1.setText(ex.getMessage());
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
